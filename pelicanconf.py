@@ -4,7 +4,7 @@ from __future__ import unicode_literals
 
 AUTHOR = 'Robert Hardy'
 SITENAME = 'Macro Data Research'
-SITEURL = ''
+SITEURL = 'https://robert-hardy.github.io/macrodataresearch'
 
 PATH = 'content'
 
