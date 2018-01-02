@@ -14,4 +14,4 @@ Quick start
 - `make devserver`,
 - visit [localhost:8000](http://localhost:8000/),
 - `make github`,
-- visit [robert-hardy.github.io/blog_roberthardy/](https://robert-hardy.github.io/blog_roberthardy/).
+- visit [robert-hardy.github.io/site/](https://robert-hardy.github.io/site/).
