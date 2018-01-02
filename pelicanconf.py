@@ -20,14 +20,14 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('Pelican', 'http://getpelican.com/'),
-         ('Python.org', 'http://python.org/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),
-         ('You can modify those links in your config file', '#'),)
+LINKS = (('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
+         ('Full Stack Quants', 'http://fullstackquants.org/'),
+         ('fermatslastspreadsheet', 'https://fermatslastspreadsheet.com/'),
+         ('GitHub', 'https://github.com/robert-hardy'),
+         ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'),)
 
 # Social widget
-SOCIAL = (('You can add links in your config file', '#'),
-          ('Another social link', '#'),)
+SOCIAL = None
 
 DEFAULT_PAGINATION = 10
 
