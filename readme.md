@@ -12,6 +12,7 @@ Quick start
 Have a look at [Martin Brochhaus's guide](http://martinbrochhaus.com/pelican2.html).
 Then:
 
-- `make devserver`
-- visit [localhost:8000](http://localhost:8000/)
-- `make github`
+- `make devserver`,
+- visit [localhost:8000](http://localhost:8000/),
+- `make github`,
+- visit [robert-hardy.github.io/blog_roberthardy/](https://robert-hardy.github.io/blog_roberthardy/).
