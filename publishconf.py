@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://robert-hardy.github.io/macrodataresearchblog'
+SITEURL = 'https://robert-hardy.github.io/blog_roberthardy'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
