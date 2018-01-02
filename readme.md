@@ -11,8 +11,6 @@ a pull request.
 Quick start
 ----
 
-Then:
-
 - `make devserver`,
 - visit [localhost:8000](http://localhost:8000/),
 - `make github`,
