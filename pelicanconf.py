@@ -27,7 +27,7 @@ LINKS = (('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
          ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'),)
 
 # Social widget
-SOCIAL = None
+SOCIAL = ()
 
 DEFAULT_PAGINATION = 10
 
