@@ -34,5 +34,16 @@ DEFAULT_PAGINATION = 10
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
 
+# Bring reports into output but do not process them.
 STATIC_PATHS=['images', 'reports']
 ARTICLE_EXCLUDES=['reports']
+
+# Fix navbar order by taking full control
+DISPLAY_CATEGORIES_ON_MENU = False
+DISPLAY_PAGES_ON_MENU = False
+
+MENUITEMS = (
+    ('Home', '/'),
+    ('About', '/pages/about.html'),
+    ('Blog', '/index_blog.html')
+    )
