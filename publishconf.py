@@ -22,3 +22,8 @@ DELETE_OUTPUT_DIRECTORY = True
 
 #DISQUS_SITENAME = ""
 #GOOGLE_ANALYTICS = ""
+
+MENUITEMS = (
+    ('Home', 'https://robert-hardy.github.io/site/index.html'),
+    ('About', 'https://robert-hardy.github.io/site/pages/about.html'),
+    ('Blog', 'https://robert-hardy.github.io/site/index_blog.html'))
