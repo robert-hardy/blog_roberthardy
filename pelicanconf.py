@@ -5,6 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Robert Hardy'
 SITENAME = 'roberthardy.io'
 SITEURL = ''
+BIO = u"I am a quant at MAN. I use computers and maths regularly."
 
 PATH = 'content'
 
@@ -20,10 +21,7 @@ AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
 # Blogroll
-LINKS = (('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
-         ('Full Stack Quants', 'http://fullstackquants.org/'),
-         ('fermatslastspreadsheet', 'https://fermatslastspreadsheet.com/'),
-         ('GitHub', 'https://github.com/robert-hardy'))
+LINKS = ()
 
 # Social widget
 SOCIAL = (
