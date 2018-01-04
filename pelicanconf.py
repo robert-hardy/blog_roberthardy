@@ -35,9 +35,8 @@ DEFAULT_PAGINATION = 10
 #RELATIVE_URLS = True
 
 # Bring reports into output but do not process them.
-STATIC_PATHS=['images', 'reports', 'extra/CNAME']
+STATIC_PATHS=['images', 'reports', 'CNAME']
 ARTICLE_EXCLUDES=['reports']
-EXTRA_PATH_METADATA = {'extra/CNAME': {'path': 'CNAME'}}
 
 # Fix navbar order by taking full control
 DISPLAY_CATEGORIES_ON_MENU = False
