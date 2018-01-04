@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 AUTHOR = 'Robert Hardy'
 SITENAME = 'roberthardy.io'
 SITEURL = ''
-BIO = u"I am a quant at MAN. I use computers and maths regularly."
+BIO = u"I am a quant at MAN. I use computers and maths every day."
 
 PATH = 'content'
 
