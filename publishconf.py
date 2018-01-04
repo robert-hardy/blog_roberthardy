@@ -10,7 +10,7 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://robert-hardy.github.io/site'
+SITEURL = 'http://roberthardy.io'
 RELATIVE_URLS = False
 
 FEED_ALL_ATOM = 'feeds/all.atom.xml'
@@ -22,8 +22,3 @@ DELETE_OUTPUT_DIRECTORY = True
 
 #DISQUS_SITENAME = ""
 #GOOGLE_ANALYTICS = ""
-
-MENUITEMS = (
-    ('Home', 'https://robert-hardy.github.io/site/index.html'),
-    ('About', 'https://robert-hardy.github.io/site/pages/about.html'),
-    ('Blog', 'https://robert-hardy.github.io/site/index_blog.html'))
