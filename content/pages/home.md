@@ -1,4 +1,4 @@
-Title: Site under construction
+Title: Home
 URL:
 save_as: index.html
 
