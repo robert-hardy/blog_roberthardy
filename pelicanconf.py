@@ -27,8 +27,7 @@ LINKS = ()
 SOCIAL = (
     ('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
     ('Github', 'https://github.com/robert-hardy'),
-    ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'),
-    ('Twitter', 'https://twitter.com/robert65535'))
+    ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'))
 
 DEFAULT_PAGINATION = 10
 
