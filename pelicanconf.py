@@ -47,3 +47,7 @@ MENUITEMS = (
     ('About', '/pages/about.html'),
     ('Blog', '/index_blog.html')
     )
+
+
+# Home page for the blog articles.
+INDEX_SAVE_AS='index_blog.html'
