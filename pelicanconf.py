@@ -23,11 +23,14 @@ AUTHOR_FEED_RSS = None
 LINKS = (('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
          ('Full Stack Quants', 'http://fullstackquants.org/'),
          ('fermatslastspreadsheet', 'https://fermatslastspreadsheet.com/'),
-         ('GitHub', 'https://github.com/robert-hardy'),
-         ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'),)
+         ('GitHub', 'https://github.com/robert-hardy'))
 
 # Social widget
-SOCIAL = ()
+SOCIAL = (
+    ('LinkedIn', 'https://uk.linkedin.com/in/roberthardyuk'),
+    ('Github', 'https://github.com/robert-hardy'),
+    ('Stack Overflow', 'http://stackoverflow.com/users/1243435/robert'),
+    ('Twitter', 'https://twitter.com/robert65535'))
 
 DEFAULT_PAGINATION = 10
 
