@@ -8,6 +8,13 @@ If you wish to make corrections or amendments or suggestions, please do so via
 a pull request.
 
 
+Installs
+----
+
+    virtualenv venv
+    source venv/bin/activate
+    pip install -r requirements.txt
+
 Quick start
 ----
 
