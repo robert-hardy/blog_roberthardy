@@ -16,10 +16,14 @@ Installs
     source venv/bin/activate
     pip install -r requirements.txt
 
+Note: without the `Markdown` install Pelican will seem to work but will not
+process markdown files.
+
 Quick start
 ----
 
 - `make devserver`,
 - visit [localhost:8000](http://localhost:8000/),
+- force a rebuild with `pelican content`,
 - `make github`,
 - visit [robert-hardy.github.io/site/](https://robert-hardy.github.io/site/).
