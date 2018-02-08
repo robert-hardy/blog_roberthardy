@@ -46,8 +46,7 @@ MENUITEMS = (
     ('Home', '/'),
     ('About', 'pages/about.html'),
     ('Blog', '/index_blog.html'),
-    ('Data', '/pages/data-sources.html'),
-    ('Apps', '/apps/index.html'),
+    ('Data', '/pages/data-sources.html')
     )
 
 
