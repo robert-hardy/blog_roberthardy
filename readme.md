@@ -27,3 +27,9 @@ Quick start
 - force a rebuild with `pelican content`,
 - `make github`,
 - visit [robert-hardy.github.io/site/](https://robert-hardy.github.io/site/).
+
+Formatting
+----
+[A blog post by
+Elfnor](http://elfnor.com/pelican-and-markdown-styling-cheat-sheet.html) helps
+get the markdown formatting right.

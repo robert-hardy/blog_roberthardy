@@ -58,21 +58,21 @@ Erlang](https://ferd.ca/the-zen-of-erlang.html):
 ## Erlang 'data manipulation' stuff: lists, functions, etc.
 
 Here is the factorial function in Erlang:
-
-    factorial(1) ->
-      1;
-    factorial(N) ->
-      N * factorial(N-1).
-
+```
+factorial(1) -> 1;
+factorial(N) -> N * factorial(N-1).
+```
 You can see for yourself how pattern matching is used.
 
 Here is a list comprehension which produces a list of tuples:
 
-    # In Python:
-    [ (x, y, x*y) for x in range(1, 10) for y in range(1, 10) ]
+```
+# In Python:
+[ (x, y, x*y) for x in range(1, 10) for y in range(1, 10) ]
 
-    % In Erlang:
-    [ {X, Y, X*Y} || X<-lists:seq(1, 10), Y<-lists:seq(1, 10) ]
+% In Erlang:
+[ {X, Y, X*Y} || X<-lists:seq(1, 10), Y<-lists:seq(1, 10) ]
+```
 
 Note that all variables in Erlang must start with a capital letter, otherwise
 they get interpreted as an atom.
@@ -81,28 +81,29 @@ they get interpreted as an atom.
 To run Erlang code you can use [the escript
 command](http://erlang.org/doc/man/escript.html). On that page there is an
 example for the factorial function.
+```erlang
+#!/usr/bin/env escript
+% vim: ft=erlang
 
-    #!/usr/bin/env escript
-    % vim: ft=erlang
+main([String]) ->
+    try
+        N = list_to_integer(String),
+        F = fac(N),
+        io:format("factorial ~w = ~w\n", [N,F])
+    catch
+        _:_ ->
+            usage()
+    end;
+main(_) ->
+    usage().
 
-    main([String]) ->
-        try
-            N = list_to_integer(String),
-            F = fac(N),
-            io:format("factorial ~w = ~w\n", [N,F])
-        catch
-            _:_ ->
-                usage()
-        end;
-    main(_) ->
-        usage().
+usage() ->
+    io:format("usage: factorial integer\n"),
+    halt(1).
 
-    usage() ->
-        io:format("usage: factorial integer\n"),
-        halt(1).
-
-    fac(0) -> 1;
-    fac(N) -> N * fac(N-1).
+fac(0) -> 1;
+fac(N) -> N * fac(N-1).
+```
 
 
 ## OTP
@@ -112,32 +113,40 @@ simple way to do that.
 
 I create two files, one of functions:
 
-    # my_functions.py
-    def func_a(x):
-        return 2 * x
+```
+# my_functions.py
+def func_a(x):
+    return 2 * x
 
-    def func_b(x):
-        return x + 100
+def func_b(x):
+    return x + 100
+```
 
 and one which acts as a layer of indirection:
 
-    # my_module.py
-    from my_functions import func_a
+```
+# my_module.py
+from my_functions import func_a
 
-    func = func_a
+func = func_a
+```
 
 At the command line I can call the function in `my_module`:
 
-    > import my_module
-    > my_module.func(10)
-    20
+```
+> import my_module
+> my_module.func(10)
+20
+```
 
 I can hot-swap too:
 
-    > from my_functions import func_b
-    > my_module.func = func_b
-    > my_module.func(10)
-    120
+```
+> from my_functions import func_b
+> my_module.func = func_b
+> my_module.func(10)
+120
+```
 
 The important point is that this has been done by creating a layer of
 indirection. I do not call the functions directly, I call something which goes
@@ -165,11 +174,13 @@ The building block for this is the _process_. In Erlang it is trivially easy to
 create a new process and run a function within that process. Here we run a
 simple multiply-and-print function from within a newly-spawned process:
 
-    % this_module.erl
-    my_multiplication_function(Arg1, Arg2) ->
-       io:format("~p times ~p is ~p", [Arg1, Arg2, Arg1 * Arg2]).
-    start() ->
-       spawn(this_module, my_multiplication_function, [2, 10]),
+```
+% this_module.erl
+my_multiplication_function(Arg1, Arg2) ->
+   io:format("~p times ~p is ~p", [Arg1, Arg2, Arg1 * Arg2]).
+start() ->
+   spawn(this_module, my_multiplication_function, [2, 10]),
+```
 
 ### But why?
 
