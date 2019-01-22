@@ -14,8 +14,8 @@ like these bits.&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;strong&gt;The OTP stuff&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;Fred Hebert's brilliant book dedicates a number of chapters to OTP. But
-what on earth is it?&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://learnyousomeerlang.com"&gt;Fred Hebert's brilliant book&lt;/a&gt; dedicates a
+number of chapters to OTP. But what on earth is it?&lt;/p&gt;
 &lt;p&gt;OTP is a massive topic but most texts introduce &lt;code&gt;gen_server&lt;/code&gt; early on. As
 an approximation, we will show how the &lt;code&gt;gen_server&lt;/code&gt; can be seen as a clever
 kind of &lt;code&gt;import&lt;/code&gt;. Erlang's OTP is much bigger than this, but this should give
