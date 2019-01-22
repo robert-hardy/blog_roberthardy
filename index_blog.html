@@ -5,10 +5,6 @@
         <title>roberthardy.io</title>
         <link rel="stylesheet" href="http://roberthardy.io/theme/css/main.css" />
         <link href="http://roberthardy.io/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="roberthardy.io Atom Feed" />
-
-        <!--[if IE]>
-            <script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-        <![endif]-->
 </head>
 
 <body id="index" class="home">
@@ -24,70 +20,232 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="http://roberthardy.io/more-rates.html">More rates</a></h1>
+                    <h1 class="entry-title"><a href="http://roberthardy.io/erlang-for-python-users.html">Erlang for Python users</a></h1>
 <footer class="post-info">
-        <abbr class="published" title="2018-01-04T00:00:00+00:00">
-                Published: Thu 04 January 2018
+        <abbr class="published" title="2019-01-22T11:00:00+00:00">
+                Published: Tue 22 January 2019
         </abbr>
 
         <address class="vcard author">
                 By                         <a class="url fn" href="http://roberthardy.io/author/robert-hardy.html">Robert Hardy</a>
         </address>
-<p>In <a href="http://roberthardy.io/category/macro-blog.html">Macro blog</a>.</p>
+<p>In <a href="http://roberthardy.io/category/programming.html">Programming</a>.</p>
 
-</footer><!-- /.post-info --><p>Have a look at <a href="http://roberthardy.io/reports/usd_2y_10y_scatter.html">this report on USD 2y and 10y
-rates</a>.</p>                </article>
+</footer><!-- /.post-info --><h2>Summary</h2>
+<p>In order to make the basic concepts of Erlang accessible to a Python user, I
+split Erlang into four pieces:</p>
+<ol>
+<li>
+<p><strong>The 'data manipulation' stuff</strong></p>
+<p>Erlang is very similar to Python here.</p>
+<p>You can do list comprehensions, ranges, dicts. Practically everything you
+do in Python is available in Erlang.</p>
+<p>On top of this, Erlang gives you <em>pattern matching</em> and atoms. I really
+like these bits.</p>
+<p>Oh and Erlang has no mutable state.</p>
+</li>
+<li>
+<p><strong>The OTP stuff</strong></p>
+<p>Fred Hebert's brilliant book dedicates a number of chapters to OTP. But
+what on earth is it?</p>
+<p>OTP is a massive topic but most texts introduce <code>gen_server</code> early on. As
+an approximation, we will show how the <code>gen_server</code> can be seen as a clever
+kind of <code>import</code>. Erlang's OTP is much bigger than this, but this should give
+you a sense of where OTP sits in the stack.</p>
+</li>
+<li>
+<p><strong>The process stuff</strong></p>
+<p>OTP is possible because of the central role that processes have been given
+in Erlang. Processes and OTP are at the core of Erlang's strategy for building
+fault-tolerant code.</p>
+<p>But <em>processes are just processes</em>. There is nothing else going on that you
+need to know about, at least for this level of understanding.</p>
+</li>
+<li>
+<p><strong>Fault-tolerant systems</strong></p>
+<p>This is where Erlang stands out: you can build systems which are protected
+from those very-rare-but-hard-to-find bugs.</p>
+<p>Of course, in a system that handles a lot of load, the term 'very rare' is
+relative. I quote from <a href="https://ferd.ca/the-zen-of-erlang.html">Fred's Zen of
+Erlang</a>:</p>
+<blockquote>
+<p>... a once in a billion bug will show up every 3 hours in a system doing 100,000
+requests a second ...</p>
+<p>... a once in a million bug could similarly show up once every 10 seconds on
+such a system ...</p>
+</blockquote>
+</li>
+</ol>
+<h2>Erlang 'data manipulation' stuff: lists, functions, etc.</h2>
+<p>Here is the factorial function in Erlang:</p>
+<div class="highlight"><pre><span></span>factorial(1) -&amp;gt;
+  1;
+factorial(N) -&amp;gt;
+  N * factorial(N-1).
+</pre></div>
+
+
+<p>You can see for yourself how pattern matching is used.</p>
+<p>Here is a list comprehension which produces a list of tuples:</p>
+<div class="highlight"><pre><span></span><span class="err">#</span> <span class="nt">In</span> <span class="nt">Python</span><span class="o">:</span>
+<span class="cp">[</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">x</span><span class="o">*</span><span class="nx">y</span><span class="p">)</span> <span class="nx">for</span> <span class="n">x</span> <span class="k">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="nx">for</span> <span class="n">y</span> <span class="k">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="cp">]</span>
+
+<span class="o">%</span> <span class="nt">In</span> <span class="nt">Erlang</span><span class="o">:</span>
+<span class="cp">[</span> <span class="p">{</span><span class="nx">X</span><span class="p">,</span> <span class="nx">Y</span><span class="p">,</span> <span class="nx">X</span><span class="o">*</span><span class="nx">Y</span><span class="p">}</span> <span class="o">||</span> <span class="nx">X</span><span class="o">&amp;</span><span class="nx nx-Member">lt</span><span class="p">;</span><span class="na">-lists</span><span class="p">:</span><span class="nx">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="nx">Y</span><span class="o">&amp;</span><span class="nx nx-Member">lt</span><span class="p">;</span><span class="na">-lists</span><span class="p">:</span><span class="nx">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="cp">]</span>
+</pre></div>
+
+
+<p>Note that all variables in Erlang must start with a capital letter, otherwise
+they get interpreted as an atom.</p>
+<p>To run Erlang code you can use <a href="http://erlang.org/doc/man/escript.html">the escript
+command</a>. On that page there is an
+example for the factorial function.</p>
+<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13
+14
+15
+16
+17
+18
+19
+20
+21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env escript</span>
+<span class="c">% vim: ft=erlang</span>
+
+<span class="nf">main</span><span class="p">([</span><span class="nv">String</span><span class="p">])</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+    <span class="k">try</span>
+        <span class="nv">N</span> <span class="o">=</span> <span class="nb">list_to_integer</span><span class="p">(</span><span class="nv">String</span><span class="p">),</span>
+        <span class="nv">F</span> <span class="o">=</span> <span class="n">fac</span><span class="p">(</span><span class="nv">N</span><span class="p">),</span>
+        <span class="nn">io</span><span class="p">:</span><span class="nf">format</span><span class="p">(</span><span class="s">&quot;factorial </span><span class="si">~w</span><span class="s"> = </span><span class="si">~w</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nv">N</span><span class="p">,</span><span class="nv">F</span><span class="p">])</span>
+    <span class="k">catch</span>
+        <span class="p">_:_</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+            <span class="n">usage</span><span class="p">()</span>
+    <span class="k">end</span><span class="p">;</span>
+<span class="nf">main</span><span class="p">(_)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+    <span class="n">usage</span><span class="p">().</span>
+
+<span class="nf">usage</span><span class="p">()</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+    <span class="nn">io</span><span class="p">:</span><span class="nf">format</span><span class="p">(</span><span class="s">&quot;usage: factorial integer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span>
+    <span class="n">halt</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span>
+
+<span class="nf">fac</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">fac</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nv">N</span> <span class="o">*</span> <span class="n">fac</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span>
+</pre></div>
+</td></tr></table>
+
+<h2>OTP</h2>
+<h3>The gen_server 'behaviour'</h3>
+<p>Suppose I wanted to make it possible to 'hot swap' code in Python. Here is one
+simple way to do that.</p>
+<p>I create two files, one of functions:</p>
+<div class="highlight"><pre><span></span># my_functions.py
+def func_a(x):
+    return 2 * x
+
+def func_b(x):
+    return x + 100
+</pre></div>
+
+
+<p>and one which acts as a layer of indirection:</p>
+<div class="highlight"><pre><span></span><span class="c1"># my_module.py</span>
+<span class="kn">from</span> <span class="nn">my_functions</span> <span class="kn">import</span> <span class="n">func_a</span>
+
+<span class="n">func</span> <span class="o">=</span> <span class="n">func_a</span>
+</pre></div>
+
+
+<p>At the command line I can call the function in <code>my_module</code>:</p>
+<div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">my_module</span>
+<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">20</span>
+</pre></div>
+
+
+<p>I can hot-swap too:</p>
+<div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">my_functions</span> <span class="kn">import</span> <span class="n">func_b</span>
+<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func_b</span>
+<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="mi">120</span>
+</pre></div>
+
+
+<p>The important point is that this has been done by creating a layer of
+indirection. I do not call the functions directly, I call something which goes
+on to call the functions. No magic here.</p>
+<p>This is somewhat analogous to how <code>gen_server</code> works: you register your
+functions with a <code>gen_server</code> and call your functions via the <code>gen_server</code>.</p>
+<p>Registering is done with the <code>handle_call/3</code> and <code>handle_cast/2</code> functions in
+the <code>gen_server</code>. Hot swapping is done with the <code>code_change/3</code> function.</p>
+<h3>What does this mean?</h3>
+<p>OTP is a lot of things and contains a lot of goodies, but the idea I want to
+emphasize is that <code>gen_server</code> and some of the other OTP 'behaviours' (that is
+the name they get given) are playing with the way the code itself is managed.
+You do not have to use these OTP structures, but if you do then you can benefit
+from a lot of code-management that people have perfected over the years.</p>
+<h2>Processes</h2>
+<p>The short piece above on OTP should give you a sense of how Erlang brings
+something quite different to the table: you are able to have a much finer
+control on how your code is loaded/run/stopped/started/etc.</p>
+<p>The building block for this is the <em>process</em>. In Erlang it is trivially easy to
+create a new process and run a function within that process. Here we run a
+simple multiply-and-print function from within a newly-spawned process:</p>
+<div class="highlight"><pre><span></span><span class="c">% this_module.erl</span>
+<span class="n">my_multiplication_function</span><span class="p">(</span><span class="n">Arg1</span><span class="p">,</span> <span class="n">Arg2</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span>
+   <span class="n">io</span><span class="p">:</span><span class="n">format</span><span class="p">(</span>&quot;<span class="o">~</span><span class="n">p</span> <span class="n">times</span> <span class="o">~</span><span class="n">p</span> <span class="n">is</span> <span class="o">~</span><span class="n">p</span>&quot;<span class="p">,</span> <span class="p">[</span><span class="n">Arg1</span><span class="p">,</span> <span class="n">Arg2</span><span class="p">,</span> <span class="n">Arg1</span> <span class="o">*</span> <span class="n">Arg2</span><span class="p">]).</span>
+<span class="n">start</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span>
+   <span class="n">spawn</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">my_multiplication_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span>
+</pre></div>
+
+
+<h3>But why?</h3>
+<p>One of the main reasons for wrapping functions inside processes is that it
+allows us to build fault-tolerant systems.</p>
+<p>If we run a function inside a process and a one-in-a-million bug happens that
+kills the function then our process will exit and we can react to that --
+probably by restarting the process and re-running the function (perhaps with a
+modified set of parameters that are less likely to break).</p>
+<h2>Fault-tolerant systems</h2>
+<p>When Erlangers talk about 'let it crash', they do not mean that they write
+shoddy code which does not handle edge cases and therefore breaks.</p>
+<p>They mean that if a function breaks for some unexpected (and probably hard to
+debug) reason, then:</p>
+<ul>
+<li>let the process die,</li>
+<li>let the process tell a supervising process that it is dead and give it a
+stack trace,</li>
+<li>so that the supervisor process (or its supervisor, or its supervisor's
+supervisor, ...) can potentially restart that process and
+function in a safer state.</li>
+</ul>
+<p>These random 'breaks for unexpected reasons' will happen very often in a system
+which handles many many requests. I quote from <a href="https://ferd.ca/the-zen-of-erlang.html">Fred's Zen of
+Erlang</a>:</p>
+<blockquote>
+<p>... a once in a billion bug will show up every 3 hours in a system doing 100,000
+requests a second ...</p>
+<p>... a once in a million bug could similarly show up once every 10 seconds on
+such a system ...</p>
+</blockquote>
+<h2>Answering my own StackOverflow question</h2>
+<p>Go have a look at <a href="https://stackoverflow.com/q/54290276/1243435">my Erlang noobie question on
+StackOverflow</a>, and my answer.</p>
+<p>At that point in time I had grokked that Erlang's data-manipulation language
+was sufficiently similar to Python and had gotten some familiarity with the
+process-spawning parts, but I had not yet grokked how OTP fitted into the
+language.</p>                </article>
             </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://roberthardy.io/another-blog-post.html" rel="bookmark"
-                           title="Permalink to Another blog post">Another blog post</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2011-12-03T10:20:00+00:00">
-                Published: Sat 03 December 2011
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://roberthardy.io/author/robert-hardy.html">Robert Hardy</a>
-        </address>
-<p>In <a href="http://roberthardy.io/category/tech-blog.html">Tech blog</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Overview of how this blog was/is built.</p>
-                <a class="readmore" href="http://roberthardy.io/another-blog-post.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="http://roberthardy.io/linking-to-a-report.html" rel="bookmark"
-                           title="Permalink to Linking to a report">Linking to a report</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <abbr class="published" title="2010-12-03T10:20:00+00:00">
-                Published: Fri 03 December 2010
-        </abbr>
-
-        <address class="vcard author">
-                By                         <a class="url fn" href="http://roberthardy.io/author/robert-hardy.html">Robert Hardy</a>
-        </address>
-<p>In <a href="http://roberthardy.io/category/macro-blog.html">Macro blog</a>.</p>
-
-</footer><!-- /.post-info -->                <p>Histories of USD rates.</p>
-                <a class="readmore" href="http://roberthardy.io/linking-to-a-report.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-                </ol><!-- /#posts-list -->
-                </section><!-- /#content -->
         <section id="extras" class="body">
                 <div class="social">
                         <h2>social</h2>
