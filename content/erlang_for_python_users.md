@@ -22,8 +22,8 @@ like these bits.
 
 2. **The OTP stuff**
 
-    Fred Hebert's brilliant book dedicates a number of chapters to OTP. But
-what on earth is it?
+    [Fred Hebert's brilliant book](https://learnyousomeerlang.com) dedicates a
+number of chapters to OTP. But what on earth is it?
 
     OTP is a massive topic but most texts introduce `gen_server` early on. As
 an approximation, we will show how the `gen_server` can be seen as a clever
