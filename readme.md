@@ -2,7 +2,7 @@ roberthardy.io
 ====
 This repository contains all the content for the site and all blog articles.
 
-It was built following instructions on [Martin Brochhaus's guide](http://martinbrochhaus.com/pelican2.html).
+It was built following instructions on [Martin Brochhaus's guide](http://martinbrochhaus.com/pelican2.html). You can see Martin's source code in [his GitHub repo](https://github.com/mbrochh/mbrochh-blog).
 
 If you wish to make corrections or amendments or suggestions, please do so via
 a pull request.
