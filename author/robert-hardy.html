@@ -78,20 +78,18 @@ such a system ...</p>
 </ol>
 <h2>Erlang 'data manipulation' stuff: lists, functions, etc.</h2>
 <p>Here is the factorial function in Erlang:</p>
-<div class="highlight"><pre><span></span>factorial(1) -&amp;gt;
-  1;
-factorial(N) -&amp;gt;
-  N * factorial(N-1).
+<div class="highlight"><pre><span></span>factorial(1) -&gt; 1;
+factorial(N) -&gt; N * factorial(N-1).
 </pre></div>
 
 
 <p>You can see for yourself how pattern matching is used.</p>
 <p>Here is a list comprehension which produces a list of tuples:</p>
-<div class="highlight"><pre><span></span><span class="err">#</span> <span class="nt">In</span> <span class="nt">Python</span><span class="o">:</span>
-<span class="cp">[</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">x</span><span class="o">*</span><span class="nx">y</span><span class="p">)</span> <span class="nx">for</span> <span class="n">x</span> <span class="k">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="nx">for</span> <span class="n">y</span> <span class="k">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="cp">]</span>
+<div class="highlight"><pre><span></span># In Python:
+[ (x, y, x*y) for x in range(1, 10) for y in range(1, 10) ]
 
-<span class="o">%</span> <span class="nt">In</span> <span class="nt">Erlang</span><span class="o">:</span>
-<span class="cp">[</span> <span class="p">{</span><span class="nx">X</span><span class="p">,</span> <span class="nx">Y</span><span class="p">,</span> <span class="nx">X</span><span class="o">*</span><span class="nx">Y</span><span class="p">}</span> <span class="o">||</span> <span class="nx">X</span><span class="o">&amp;</span><span class="nx nx-Member">lt</span><span class="p">;</span><span class="na">-lists</span><span class="p">:</span><span class="nx">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">),</span> <span class="nx">Y</span><span class="o">&amp;</span><span class="nx nx-Member">lt</span><span class="p">;</span><span class="na">-lists</span><span class="p">:</span><span class="nx">seq</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="cp">]</span>
+% In Erlang:
+[ {X, Y, X*Y} || X&lt;-lists:seq(1, 10), Y&lt;-lists:seq(1, 10) ]
 </pre></div>
 
 
@@ -100,49 +98,29 @@ they get interpreted as an atom.</p>
 <p>To run Erlang code you can use <a href="http://erlang.org/doc/man/escript.html">the escript
 command</a>. On that page there is an
 example for the factorial function.</p>
-<table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
- 2
- 3
- 4
- 5
- 6
- 7
- 8
- 9
-10
-11
-12
-13
-14
-15
-16
-17
-18
-19
-20
-21</pre></div></td><td class="code"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env escript</span>
+<div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env escript</span>
 <span class="c">% vim: ft=erlang</span>
 
-<span class="nf">main</span><span class="p">([</span><span class="nv">String</span><span class="p">])</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="nf">main</span><span class="p">([</span><span class="nv">String</span><span class="p">])</span> <span class="o">-&gt;</span>
     <span class="k">try</span>
         <span class="nv">N</span> <span class="o">=</span> <span class="nb">list_to_integer</span><span class="p">(</span><span class="nv">String</span><span class="p">),</span>
         <span class="nv">F</span> <span class="o">=</span> <span class="n">fac</span><span class="p">(</span><span class="nv">N</span><span class="p">),</span>
         <span class="nn">io</span><span class="p">:</span><span class="nf">format</span><span class="p">(</span><span class="s">&quot;factorial </span><span class="si">~w</span><span class="s"> = </span><span class="si">~w</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="p">[</span><span class="nv">N</span><span class="p">,</span><span class="nv">F</span><span class="p">])</span>
     <span class="k">catch</span>
-        <span class="p">_:_</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+        <span class="p">_:_</span> <span class="o">-&gt;</span>
             <span class="n">usage</span><span class="p">()</span>
     <span class="k">end</span><span class="p">;</span>
-<span class="nf">main</span><span class="p">(_)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="nf">main</span><span class="p">(_)</span> <span class="o">-&gt;</span>
     <span class="n">usage</span><span class="p">().</span>
 
-<span class="nf">usage</span><span class="p">()</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="nf">usage</span><span class="p">()</span> <span class="o">-&gt;</span>
     <span class="nn">io</span><span class="p">:</span><span class="nf">format</span><span class="p">(</span><span class="s">&quot;usage: factorial integer</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">),</span>
     <span class="n">halt</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span>
 
-<span class="nf">fac</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="mi">1</span><span class="p">;</span>
-<span class="nf">fac</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-</span><span class="err">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="nv">N</span> <span class="o">*</span> <span class="n">fac</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span>
+<span class="nf">fac</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="mi">1</span><span class="p">;</span>
+<span class="nf">fac</span><span class="p">(</span><span class="nv">N</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nv">N</span> <span class="o">*</span> <span class="n">fac</span><span class="p">(</span><span class="nv">N</span><span class="o">-</span><span class="mi">1</span><span class="p">).</span>
 </pre></div>
-</td></tr></table>
+
 
 <h2>OTP</h2>
 <h3>The gen_server 'behaviour'</h3>
@@ -167,16 +145,16 @@ def func_b(x):
 
 
 <p>At the command line I can call the function in <code>my_module</code>:</p>
-<div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">import</span> <span class="nn">my_module</span>
-<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">import</span> <span class="nn">my_module</span>
+<span class="o">&gt;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="mi">20</span>
 </pre></div>
 
 
 <p>I can hot-swap too:</p>
-<div class="highlight"><pre><span></span><span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="kn">from</span> <span class="nn">my_functions</span> <span class="kn">import</span> <span class="n">func_b</span>
-<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func_b</span>
-<span class="o">&amp;</span><span class="n">gt</span><span class="p">;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<div class="highlight"><pre><span></span><span class="o">&gt;</span> <span class="kn">from</span> <span class="nn">my_functions</span> <span class="kn">import</span> <span class="n">func_b</span>
+<span class="o">&gt;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span> <span class="o">=</span> <span class="n">func_b</span>
+<span class="o">&gt;</span> <span class="n">my_module</span><span class="o">.</span><span class="n">func</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
 <span class="mi">120</span>
 </pre></div>
 
@@ -202,9 +180,9 @@ control on how your code is loaded/run/stopped/started/etc.</p>
 create a new process and run a function within that process. Here we run a
 simple multiply-and-print function from within a newly-spawned process:</p>
 <div class="highlight"><pre><span></span><span class="c">% this_module.erl</span>
-<span class="n">my_multiplication_function</span><span class="p">(</span><span class="n">Arg1</span><span class="p">,</span> <span class="n">Arg2</span><span class="p">)</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="n">my_multiplication_function</span><span class="p">(</span><span class="n">Arg1</span><span class="p">,</span> <span class="n">Arg2</span><span class="p">)</span> <span class="o">-&gt;</span>
    <span class="n">io</span><span class="p">:</span><span class="n">format</span><span class="p">(</span>&quot;<span class="o">~</span><span class="n">p</span> <span class="n">times</span> <span class="o">~</span><span class="n">p</span> <span class="n">is</span> <span class="o">~</span><span class="n">p</span>&quot;<span class="p">,</span> <span class="p">[</span><span class="n">Arg1</span><span class="p">,</span> <span class="n">Arg2</span><span class="p">,</span> <span class="n">Arg1</span> <span class="o">*</span> <span class="n">Arg2</span><span class="p">]).</span>
-<span class="n">start</span><span class="p">()</span> <span class="o">-&amp;</span><span class="n">gt</span><span class="p">;</span>
+<span class="n">start</span><span class="p">()</span> <span class="o">-&gt;</span>
    <span class="n">spawn</span><span class="p">(</span><span class="n">this_module</span><span class="p">,</span> <span class="n">my_multiplication_function</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">10</span><span class="p">]),</span>
 </pre></div>
 
