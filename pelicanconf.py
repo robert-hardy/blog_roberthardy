@@ -36,7 +36,7 @@ DEFAULT_PAGINATION = 10
 
 # Bring reports into output but do not process them.
 STATIC_PATHS=['images', 'reports', 'CNAME', 'apps']
-ARTICLE_EXCLUDES=['reports', 'apps']
+ARTICLE_EXCLUDES=['reports', 'apps', 'drafts']
 
 # Fix navbar order by taking full control
 DISPLAY_CATEGORIES_ON_MENU = False
