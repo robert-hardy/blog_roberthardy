@@ -42,6 +42,7 @@ This worked recently:
 in the readme (which means use a `git --recursive` when I last tried).
 - Create a `themes` directory in the root dir of the site and copy across a
   theme with `cp -r ~/git/pelican-themes/basic themes/`.
+- Add `THEME = 'themes/basic' in `pelicanconf.py`.
 - Now go see the changes you need to use in the `pelicanconf.py` file for that
   theme.
 
