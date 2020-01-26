@@ -19,6 +19,7 @@ Installs
 Note: without the `Markdown` install Pelican will seem to work but will not
 process markdown files.
 
+
 Quick start
 ----
 
@@ -27,6 +28,22 @@ Quick start
 - force a rebuild with `pelican content`,
 - `make github`,
 - visit [robert-hardy.github.io/site/](https://robert-hardy.github.io/site/).
+
+
+Changing themes
+----
+
+(This has changed over time and I reckon Martin Brochhaus's suggestions are now
+out of date.)
+
+This worked recently:
+- Clone [the `pelican-themes`
+  repo](https://github.com/getpelican/pelican-themes), following instructions
+in the readme (which means use a `git --recursive` when I last tried).
+- Create a `themes` directory in the root dir of the site and copy across a
+  theme with `cp -r ~/git/pelican-themes/basic themes/`.
+- Now go see the changes you need to use in the `pelicanconf.py` file for that
+  theme.
 
 Formatting
 ----
